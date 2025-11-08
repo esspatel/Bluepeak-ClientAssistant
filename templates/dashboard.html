@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>BlueBot Dashboard</title>
+</head>
+<body>
+  <h1>BlueBot – Lead Dashboard</h1>
+
+  {% if headers and rows %}
+    <table border="1" cellpadding="6" cellspacing="0">
+      <thead>
+        <tr>
+          {% for h in headers %}
+            <th>{{ h }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+          <tr>
+            {% for cell in row %}
+              <td>{{ cell }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No leads yet. Submit the form on the main page first.</p>
+  {% endif %}
+
+  <p><a href="/">← Back to form</a></p>
+</body>
+</html>

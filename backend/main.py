@@ -104,3 +104,23 @@ async def submit_lead(
             "summary": summary,
         },
     )
+
+@app.get("/dashboard", response_class=HTMLResponse)
+async def dashboard(request: Request):
+    headers = []
+    rows = []
+
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, newline="", encoding="utf-8") as f:
+            reader = csv.reader(f)
+            headers = next(reader, [])
+            rows = list(reader)
+
+    return templates.TemplateResponse(
+        "dashboard.html",
+        {
+            "request": request,
+            "headers": headers,
+            "rows": rows,
+        },
+    )
